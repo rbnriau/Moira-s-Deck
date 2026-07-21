@@ -1,0 +1,65 @@
+# Listar tarjetas gráficas PCI detectadas por el sistema
+lspci | grep -i vga
+
+# Ver el uso en tiempo real de la GPU AMD (frecuencia, VRAM, potencia)
+radeontop
+
+# Comprobar soporte de Vulkan y dispositivos disponibles
+vulkaninfo | grep deviceName
+
+# Ver información detallada de plataformas y dispositivos OpenCL/Vulkan
+clinfo
+
+# (Opcional, si tienes instalado ROCm) Monitor de GPU AMD
+rocm-smi
+
+# Lanzar el servidor persistente en segundo plano (escuchando peticiones HTTP)
+./sd-server \
+  -m ./models/ComicCraftLCM_beta4.safetensors \
+  --port 8080 \
+  --threads 4 \
+  -v
+
+# Ejemplo de parámetros para la API / Test manual en línea de comandos
+./sd-cli \
+  -m ./models/ComicCraftLCM_beta4.safetensors \
+  -p "read notes, 1girl, comic style, clean lighting" \
+  -n "card frame, border, text, watermark" \
+  -W 320 -H 448 \
+  --steps 4 \
+  --cfg-scale 1.5 \
+  --sampling-method euler_a \
+  -o ./output.png
+
+  # Listar modelos cargados localmente
+ollama list
+
+# Ver qué modelos están consumiendo VRAM en tiempo real
+ollama ps
+
+# Eliminar un modelo descargado para liberar espacio en disco
+ollama rm <nombre_del_modelo>
+
+# Descargar un nuevo modelo de texto
+ollama pull <nombre_del_modelo>
+
+# Ejecutar interactivamente un modelo en la terminal
+ollama run <nombre_del_modelo>
+
+# Detener un modelo en ejecución para liberar VRAM inmediatamente
+ollama stop <nombre_del_modelo>
+
+# Ver uso general de RAM y SWAP en tiempo real (en MB/GB)
+free -h
+
+# Buscar procesos activos de IA (Ollama / sd-server)
+ps aux | grep -E "ollama|sd-server"
+
+# Forzar el cierre de un servidor colgado
+killall sd-server
+killall ollama
+
+# Asignar GPU específica a Ollama (en caso de querer aislar dispositivos)
+CUDA_VISIBLE_DEVICES=0 ollama serve
+# O para AMD ROCm/HIP:
+HIP_VISIBLE_DEVICES=0 ollama serve

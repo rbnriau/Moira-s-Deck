@@ -1,0 +1,21 @@
+# Archivos del sistema y editor
+.DS_Store
+.idea/
+.vscode/
+
+# Modelos y pesos de IA (pesados)
+*.safetensors
+*.bin
+*.ckpt
+*.gguf
+# Salidas de prueba e imágenes generadas
+*.png
+*.jpg
+outputs/
+temp/
+
+# Compilados y ejecutables locales
+sd-server
+sd-cli
+build/
+*.o
