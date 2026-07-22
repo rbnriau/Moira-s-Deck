@@ -1,0 +1,24 @@
+[ 1. Jugador elige una carta ]
+               │
+               ▼
+[ 2. MOTOR DEL JUEGO ] ──(Envía prompt de estado)──> [ GEMMA 3 (Ollama/LLM) ]
+               │                                            │
+               │ <──────(Devuelve el JSON completo)─────────┘
+               │
+[ 3. PARSER / MOTOR DE LÓGICA ]
+   ├── Extrae "narrativa" ──> Actualiza la UI de texto
+   └── Extrae "cartas[ ].prompt_sd"
+               │
+               ▼
+[ 4. PREPARACIÓN DE PROMPTS DE IMAGEN ]
+   (Concatena: prompt_sd de Gemma + Triggers de Estilo Cómic)
+               │
+               ▼
+[ 5. MOTOR DEL JUEGO ] ──(Envía prompt formateado)─> [ STABLE DIFFUSION (LCM) ]
+               │                                            │
+               │ <──────(Devuelve Imagen / Bitmap)──────────┘
+               │
+[ 6. RENDERIZADO EN UI ]
+   (Inyecta la imagen en el marco transparente de la carta)
+
+
